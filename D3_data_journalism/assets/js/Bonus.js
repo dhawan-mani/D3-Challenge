@@ -12,8 +12,8 @@ let margin = {
 };
 
 // calculate chart height and width
-let width = svgWidth - margin.right - margin.left;
-let height = svgHeight - margin.top - margin.bottom;
+let Chartwidth = svgWidth - margin.right - margin.left;
+let Chartheight = svgHeight - margin.top - margin.bottom;
 
 
 // Selecting the scatter id and appending the chart to it
@@ -41,7 +41,7 @@ function xScale(data, chosenXAxis) {
     let xLinearScale = d3.scaleLinear()
       .domain([d3.min(data, d => d[chosenXAxis]) * 0.8,
         d3.max(data, d => d[chosenXAxis]) * 1.2])
-      .range([0, width]);
+      .range([0, Chartwidth]);
 
     return xLinearScale;
 }
@@ -51,7 +51,7 @@ function yScale(data, chosenYAxis) {
   let yLinearScale = d3.scaleLinear()
     .domain([d3.min(data, d => d[chosenYAxis]) * 0.8,
       d3.max(data, d => d[chosenYAxis]) * 1.2])
-    .range([height, 0]);
+    .range([Chartheight, 0]);
 
   return yLinearScale;
 }
@@ -186,7 +186,7 @@ d3.csv('./assets/data/data.csv').then(function(data) {
     //append X
     var xAxis = chartGroup.append('g')
       .classed('x-axis', true)
-      .attr('transform', `translate(0, ${height})`)
+      .attr('transform', `translate(0, ${Chartheight})`)
       .call(bottomAxis);
 
     //append Y
@@ -220,7 +220,7 @@ d3.csv('./assets/data/data.csv').then(function(data) {
 
     //create a group for the x axis labels and appending labels one by one
     var xLabelsGroup = chartGroup.append('g')
-      .attr('transform', `translate(${width / 2}, ${height + 10 + margin.top})`);
+      .attr('transform', `translate(${Chartwidth / 2}, ${Chartheight + 10 + margin.top})`);
 
     var PovertyLabel = xLabelsGroup.append('text')
       .classed('aText', true)
@@ -248,7 +248,7 @@ d3.csv('./assets/data/data.csv').then(function(data) {
 
 //create a group for the x axis labels and appending labels one by one
     var yLabelsGroup = chartGroup.append('g')
-      .attr('transform', `translate(${0 - margin.left/4}, ${height/2})`);
+      .attr('transform', `translate(${0 - margin.left/4}, ${Chartheight/2})`);
 
     var HealthcareLabel = yLabelsGroup.append('text')
       .classed('aText', true)
