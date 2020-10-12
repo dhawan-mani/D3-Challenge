@@ -204,7 +204,6 @@ d3.csv('./assets/data/data.csv').then(function(data) {
       .attr('cx', d => xLinearScale(d[chosenXAxis]))
       .attr('cy', d => yLinearScale(d[chosenYAxis]))
       .attr('r', 14)
-      .attr('fill','pink')
       .attr('opacity', '.5');
 
     //append Initial Text
@@ -345,10 +344,10 @@ d3.csv('./assets/data/data.csv').then(function(data) {
           }
         }
       });
-    //y axis lables event listener
-    yLabelsGroup.selectAll('text')
-      .on('click', function() {
-        var value = d3.select(this).attr('value');
+//y axis lables event listener
+yLabelsGroup.selectAll('text')
+  .on('click', function() {
+    var value = d3.select(this).attr('value');
 
         if(value !=chosenYAxis) {
             //replace chosenY with value  

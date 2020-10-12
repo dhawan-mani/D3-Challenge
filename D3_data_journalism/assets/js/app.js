@@ -1,16 +1,15 @@
 
 function make_responsive(){
+  // Declaring Global Variables
     let Healthcare=[];
     let Poverty=[] ;  
-    let Age =[];
-    let Smoke =[];
-    let obesity = [];
     var svgArea = d3.select("#scatter").select("svg");
+
+  // Clear svg area if not empty
     if(!svgArea.empty()){
         svgArea.remove();
     };
 
-// Clear svg area if its not empty
 
  // SVG wrapper dimensions are determined by the current width and
   // height of the browser window.
@@ -28,7 +27,7 @@ function make_responsive(){
       left:50,
       right:300
   }
-//   Setting chart Height and width attributes
+// Setting chart Height and width attributes
 
    let Chartheight = svgheight-margin.top-margin.bottom;
     let ChartWidth = svgwidth-margin.left-margin.right;
@@ -43,7 +42,7 @@ d3.csv("assets/data/data.csv").then(function(data){
     Healthcare.push(data.map((data)=>+data.healthcare))
     Poverty.push(data.map((data)=>+data.poverty))
     
-    // create scales
+    // create x and y scales
     var xLinearScale = d3.scaleLinear()
     .domain(d3.extent(Poverty[0]))
     .range([0, ChartWidth]);
@@ -71,7 +70,8 @@ d3.csv("assets/data/data.csv").then(function(data){
       .classed('stateCircle', true)
       .attr("cx",d=> xLinearScale(d.poverty+50))
       .attr("cy", d=> yLinearScale(d.healthcare))
-      .attr("r", "10")
+      .attr("r", "12")
+      .attr('opacity', '.8')
       .style("fill", d3.color("steelblue"))
       .attr("stroke-width", "1");
 
@@ -93,7 +93,7 @@ d3.csv("assets/data/data.csv").then(function(data){
           return d.abbr;
         })
         .attr("font-family", "sans-serif")
-        .attr("font-size", "5px")
+        .attr("font-size", "8px")
         .attr("fill", "white");
 
     // Create axes labels
